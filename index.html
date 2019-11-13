@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <title>RentZen</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap 4 References -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <!-- Link to FontAwesome -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Your custom CSS -->
+    <link rel="stylesheet" href="css/app.css">
+    <!-- Your custom JavaScript -->
+    <script src="js/app.js"></script>
+
+    <!-- Link to image for the favicon -->
+    <link rel="icon" href="images/favicon.png">
+</head>
+
+<body>
+
+    <!-- Top Navigation Bar -->
+
+    <nav class="navbar navbar-expand-md bg-dark navbar-dark fixed-top">
+        <!-- Logo -->
+        <a class="navbar-brand" href="index.html">
+            <img alt="Rentzen Logo" src="images/favicon.png" style="width:65px;">
+        </a>
+
+        <!-- Toggler Icon for responsiveness -->
+        <button id="toggle-icon" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#collapsibleNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+            <!--Menu sets on the left -->
+            <ul class="navbar-nav mr-auto">
+            </ul>
+            <!--Menu sets on the right -->
+            <!--Each individual item can be secured by adding the class: secured -->
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item secured">
+                    <a class="nav-link" href="#div-dashboard"><i class="fa fa-list"></i> Dashboard </a>
+                </li>
+                </li>
+                <li class="nav-item secured">
+                    <a class="nav-link" href="#div-login"><i class="fa fa-sign-out"></i>Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <br><br><br><br>
+
+    <!--Start container for BS4 (Bootstrap 4) formatting-->
+    <div class="container-fluid">
+
+        <div class="row text-center">
+            <div class="col-md-12">
+                &nbsp;
+                <!-- place holder for additional top row content -->
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-2"></div>
+
+            <div class="col-md-8 content-wrapper " id="div-login" style="display: none;">
+                <div class="text-center">
+                    <img class="img-fluid" src="images/city.png" alt="Philadelphia Skyline">
+                </div>
+                <br>
+                <div class="text-center">
+                    <h2>Sign In</h2>
+                </div>
+                <form id='form-login'>
+                    <label for="username">Email:</label>
+                    <input type="text" name="username" id="username" class="form-control">
+                    <label for="password">Password:</label>
+                    <input type="password" name="password" id="password" class="form-control">
+                    <br>
+                    <div class="text-center">
+                        <input type="button" value="Sign in as renter" name="btnLogin" id="btnLogin"
+                            class="btn btn-primary">
+                        <p>Don't have an account? <a id="signup-link" href="#div-signup">Sign up!</a></p>
+                    </div>
+                    <br>
+                    <div id='login_message' class="alert alert-danger text-center" style="display:none;">
+                    </div>
+                </form>
+            </div>
+
+            <div class="col-md-8 content-wrapper " id="div-dashboard" style="display: none;">
+                <div class="list-group">
+                    <div href="#div-dashboard" class="list-group-item list-group-item-action active"><b>Renters
+                            Dashboards </b></div>
+                    <a href="#div-search" class="list-group-item list-group-item-action">Search for properties <i
+                            class="fa fa-angle-double-right pull-right"></i></a>
+                    <a href="#div-applications" class="list-group-item list-group-item-action">My rental applications <i
+                            class="fa fa-angle-double-right pull-right"></i></a>
+                </div>
+                <br>
+                <div class="list-group">
+                    <div href="#div-dashboard" class="list-group-item list-group-item-action active"><b>Account </b>
+                    </div>
+                    <a href="#div-profile" class="list-group-item list-group-item-action">Update Profile <i
+                            class="fa fa-angle-double-right pull-right"></i></a>
+                    <a href="#div-login" class="list-group-item list-group-item-action">Logout <i
+                            class="fa fa-angle-double-right pull-right"></i></a>
+                </div>
+            </div>
+
+
+            <div class="col-md-8 content-wrapper " id="div-home" style="display: none;">
+                <div class="text-center">
+                    <div>
+                        <img class="img-fluid" src="images/city.png" alt="Philadelphia Skyline">
+                    </div>
+                    <br>
+                    <div class="body-text">
+                        <h1>Welcome to RentZen</h1>
+                        <br>
+                        <p><strong>Our Mission? </strong>Bring zen to renting. </p>
+                        <p>RentZen provides a digital experience for landlords to find qualified tenants
+                            and renters to find the homr of their dreams without the hassle of in-person showings.
+                            It's an all-in-one platform for renting homes and apartments. RentZen connects landlords
+                            and renters via an easy to use platform that reduces in-person visits to properties
+                            reviews user qualifications, and streamlines communication between landlords and renters.
+                        </p>
+                    </div>
+                    <div>
+                        <input class="btn btn-primary" id="signup-button" type="button" value="Sign Up">
+                        <input class="btn btn-primary signin-button" id="signin-button" type="button" value="Sign In">
+                    </div>
+                    <br>
+                </div>
+            </div>
+
+            <div class="col-md-8 content-wrapper " id="div-search" style="display: none;">
+                <div>
+                    <div>
+                        <img class="img-fluid" src="images/city.png" alt="Philadelphia Skyline">
+                    </div>
+                    <br>
+                    <div>
+                        <div class="text-center">
+                            <h1>Find your home</h1>
+                            <p>Only listed properties can be found here.</p>
+                            <input id="showProp" type="hidden" href="#div-properties">
+                        </div>
+                        <form id='form-search'>
+                            <label for="city">City:</label>
+                            <input type="text" name="city" id="city" class="form-control">
+                            <input type="text" style="display: none">
+                            <br>
+                            <div class="text-center">
+                                <input type="button" value="Search" id="btnSearch" class="btn btn-primary">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-8 content-wrapper " id="div-properties" style="display: none;">
+                <h1>Properties</h1>
+                <div class='row' id='divrow'>
+
+                </div>
+            </div>
+
+            <div class="col-md-8 content-wrapper " id="div-applications" style="display: none;">
+                <h1>My Rental Applications</h1>
+                <div class="table-responsive" id="rentalApplications">
+                    <table class="table">
+                        <thread>
+                            <tr>
+                                <th>Property</th>
+                                <th>Landlord</th>
+                                <th>Rental Fee</th>
+                                <th>Status</th>
+                            </tr>
+                        </thread>
+                        <tbody>
+                            <tr>
+                                <td id="property"></td>
+                                <td id="landlord"></td>
+                                <td id="rentalFee"></td>
+                                <td id="status"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="col-md-8 content-wrapper " id="div-profile" style="display: none;">
+                <div>
+                    <h1>Update Renter Profile</h1>
+                    <form id="form-profile">
+                        <input type="hidden" name="renterid" id="renterid">
+                        <label for="email">Username:</label>
+                        <input type="text" name="username" id="username1" class="form-control">
+                        <label for="password">Password:</label>
+                        <input type="password" name="password" id="password1" class="form-control">
+                        <label for="firstName">First Name:</label>
+                        <input type="text" name="firstname" id="firstname1" class="form-control">
+                        <label for="lastName">Last Name:</label>
+                        <input type="text" name="lastname" id="lastname1" class="form-control">
+                        <label for="phoneNumber">Phone Number:</label>
+                        <input type="number" name="phone" id="phone1" class="form-control">
+                        <label for="creditrating">Credit Rating:</label>
+                        <input type="number" name="creditrating" id="creditrating1" class="form-control">
+                        <label for="income">Income:</label>
+                        <input type="number" name="income" id="income1" class="form-control">
+                        <br>
+                        <div class="text-center">
+                            <input type="button" value="Update Profile" id="update-button" class="btn btn-primary">
+                        </div>
+                        <br>
+                        <div id="update-message" class="alert alert-danger text-center" style="display:none;">
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="col-md-8 content-wrapper " id="div-signup" style="display: none;">
+                <div>
+                    <br>
+                    <div class="body-text">
+                        <h1 class="text-center">Renter Sign Up</h1>
+                        <form id="form-signup">
+                            <label for="email">Email:</label>
+                            <input type="text" name="username" id="username" class="form-control">
+                            <label for="password">Password:</label>
+                            <input type="password" name="password" id="password" class="form-control">
+                            <br>
+                            <div class="text-center">
+                                <input type="button" value="Sign Up" name="signup-button2" id="signup-button2"
+                                    class="btn btn-primary">
+                            </div>
+                            <br>
+                            <div id="signup-message" class="alert alert-danger text-center" style="display:none;">
+
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-8 content-wrapper " id="div-property" style="display: none;">
+                <div class="text-center">
+                    <br>
+                    <h1>Property</h1>
+                    <input class="btn btn-primary signin-button" id="signin-button2" type="button" value="Sign In">
+                </div>
+            </div>
+
+            <div class="col-md-8 content-wrapper " id="div-confirmation" style="display: none;">
+                <div class="text-center">
+                    <br>
+                    <h1>Your RentZen account was created</h1>
+                    <input class="btn btn-primary signin-button" id="signin-button2" type="button" value="Sign In">
+                </div>
+            </div>
+
+            <div class="col-md-2"></div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <div>
+                    &nbsp;
+                </div>
+            </div>
+        </div>
+
+    </div> <!-- container //-->
+
+    <br>
+    <div class="container-fluid bg-dark text-white">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <p>&copy; 2019 RentZen - MIS3502</p>
+                <p>About us</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 text-center">
+                &nbsp;
+                <!-- place holder for additional footer content -->
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
