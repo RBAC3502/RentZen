@@ -169,9 +169,9 @@ var renderPropertyPage = function(data){
 			console.log(result);
 
 			if (result.picture_url == ""){
-				propPic =  "<img class='img-fluid' src='images/no_image.png'></img>"
+				var propPic =  "<img class='img-fluid' src='images/no_image.png'></img>"
 			}
-			
+
 			$("#property-image").html(propPic)
 			$("#description").html(result.description);
 			$("#city1").html(result.city);
