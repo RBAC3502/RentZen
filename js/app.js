@@ -171,7 +171,8 @@ var renderPropertyPage = function(data){
 			if (result.picture_url == ""){
 				var propPic =  "<img class='img-fluid' src='images/no_image.png'></img>"
 			}
-
+			
+			$("#streetName").html(result.street);
 			$("#property-image").html(propPic)
 			$("#description").html(result.description);
 			$("#city1").html(result.city);
