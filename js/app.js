@@ -167,6 +167,13 @@ var renderPropertyPage = function(data){
 		data: data,
 		success: function(result){
 			console.log(result);
+			$("#description").html(result.description);
+			$("#city").html(result.city);
+			$("#beds").html(result.beds);
+			$("#baths").html(result.baths);
+			$("#square-feet").html(result.sqft);
+			$("#monthly-rent").html(result.rental_fee);
+
 		},
 		error: function(){
 			console.log(result)
