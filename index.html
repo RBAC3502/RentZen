@@ -16,7 +16,6 @@
     <link rel="stylesheet" href="css/app.css">
     <!-- Your custom JavaScript -->
     <script src="js/app.js"></script>
-
     <!-- Link to image for the favicon -->
     <link rel="icon" href="images/favicon.png">
 </head>
@@ -254,19 +253,30 @@
             <div class="col-md-8 content-wrapper " id="div-property" style="display: none;">
                 <div>
                     <br>
+                    <form id="geocode">
+                        <input type="hidden" id="address" name="address">
+                        <input type="hidden" id="key" name="key" value="AIzaSyBkYy3QdqyYgHr8_jUiX8WEePPE5DGIQy8">
+                    </form>
                     <h2>Property on <span id="streetName"></span></h2>
             
                     <div id="property-image"></div>
-                    <p><b>Description:</b></p>
+                    <div id="map" style="display: none"></div>
+                    <br>
+                    <b>Description:</b>
                     <div id="description"></div>
-                    <p><b>City:</b></p>
+                    <br>
+                    <b>City:</b>
                     <div id="city1"></div>
-                    <p><b>Beds:</b></p>
+                    <br>
+                    <b>Beds:</b>
                     <div id="beds"></div>
-                    <p><b>Square Feet</b></p>
+                    <br>
+                    <b>Square Feet</b>
                     <div id="sqft"></div>
-                    <p><b>Monthly Rent:</b></p>
+                    <br>
+                    <b>Monthly Rent:</b>
                     <div id="rental_fee"></div>
+                    <br>
                     <div class="text-center">
                         <input type="button" value="Apply" id="property-apply" class="btn btn-primary btn-lg btn-block">
                         <input type="button" value="Google Street View" id="street-view"
@@ -313,6 +323,7 @@
             </div>
         </div>
     </div>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBkYy3QdqyYgHr8_jUiX8WEePPE5DGIQy8"></script>
 </body>
 
 </html>
