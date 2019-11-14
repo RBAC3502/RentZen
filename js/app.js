@@ -167,12 +167,19 @@ var renderPropertyPage = function(data){
 		data: data,
 		success: function(result){
 			console.log(result);
+
+			if (result.picture_url == ""){
+				propPic =  "<img class='img-fluid' src='images/no_image.png'></img>"
+			}
+			
+			$("#property-image").html(propPic)
 			$("#description").html(result.description);
 			$("#city1").html(result.city);
 			$("#beds").html(result.beds);
 			$("#baths").html(result.baths);
 			$("#sqft").html(result.sqft);
 			$("#rental_fee").html(result.rental_fee);
+
 
 		},
 		error: function(){
