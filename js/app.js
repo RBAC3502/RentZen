@@ -8,13 +8,22 @@ localStorage.lastnavlink = '';
 
 /* SUPPORTING FUNCTIONS */
 
-var navigationControl = function (the_link, id) {
-
+var navigationControl = function (the_link) {
+	console.log(the_link)
 	/* manage the content that is displayed */
 	var idToShow = $(the_link).attr("href");
 	localStorage.lastnavlink = idToShow;
 	console.log(the_link)
 	console.log(idToShow);
+
+	if(idToShow == "#div-property"){
+		var tag = $(the_link).find("input");
+		var data = $(tag).serialize();
+		console.log(the_link);
+		console.log(tag);
+		console.log(data);
+		renderPropertyPage(data);
+	}
 
 	if (idToShow == '#div-login') {
 		/* what happens if the login/logout link is clicked? */
@@ -23,11 +32,6 @@ var navigationControl = function (the_link, id) {
 		$(".secured").addClass("locked");
 		$(".secured").removeClass("unlocked");
 	}
-
-	// if (idToShow == '#div-property') {
-
-	// 	renderPropertyPage();
-	// }
 
 	$(".content-wrapper").hide(); /* hide all content-wrappers */
 	$(idToShow).show(); /* show the chosen content wrapper */
@@ -127,6 +131,7 @@ var buttonFunc = function (div) {
 var searchProperties = function(){
 	var the_serialized_data = $("#form-search").serialize();
 	var url = endpoint02 + "/rentalproperties"
+	$("#divrow").html("");
 	$.ajax({
 		url: url,
 		type: "GET",
@@ -141,7 +146,7 @@ var searchProperties = function(){
 					propPic =  "<img class='img-fluid' src='images/no_image.png'></img>"
 				}
 				var thumbnail = "<div class='col-md-6'><div>"
-				var propertyId = "<input type='hidden' value='" + data[i].propertyid + "'>"
+				var propertyId = "<input type='hidden' name='propertyid' value='" + data[i].propertyid + "'>"
 
 				appendProperty = thumbnail + "<a onclick='navigationControl(this);' href='#div-property'>" + data[i].street + "<br>" + propPic + propertyId +"</a>" +  "</div></div>"
 				$("#divrow").append(appendProperty);
@@ -154,11 +159,20 @@ var searchProperties = function(){
 	})
 };
 
-// var renderPropertyPage = function(){
-// 	$.ajax({
-// 		url: url,
-// 	})
-// }
+var renderPropertyPage = function(data){
+	var url = endpoint02 + "/rentalproperty"
+	$.ajax({
+		url: url,
+		type: "GET",
+		data: data,
+		success: function(result){
+			console.log(result);
+		},
+		error: function(){
+			console.log(result)
+		}
+	})
+}
 
 //document ready section
 $(document).ready(function () {
