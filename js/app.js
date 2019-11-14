@@ -23,6 +23,8 @@ var navigationControl = function (the_link) {
 		console.log(tag);
 		console.log(data);
 		renderPropertyPage(data);
+		$("#map").hide();
+		$("#property-image").show();
 	}
 
 	if (idToShow == '#div-login') {
@@ -148,7 +150,7 @@ var searchProperties = function(){
 				var thumbnail = "<div class='col-md-6'><div>"
 				var propertyId = "<input type='hidden' name='propertyid' value='" + data[i].propertyid + "'>"
 
-				appendProperty = thumbnail + "<a onclick='navigationControl(this);' href='#div-property'>" + data[i].street + "<br>" + propPic + propertyId +"</a>" +  "</div></div>"
+				appendProperty = thumbnail + "<a onclick='navigationControl(this);' href='#div-property'>" + data[i].street + "<br>" + propPic + propertyId +"</a>"  +  "</div></div>"
 				$("#divrow").append(appendProperty);
 			}
 			navigationControl("#showProp");
@@ -180,13 +182,41 @@ var renderPropertyPage = function(data){
 			$("#baths").html(result.baths);
 			$("#sqft").html(result.sqft);
 			$("#rental_fee").html(result.rental_fee);
-
+			$("#address").val(result.street)
 
 		},
 		error: function(){
 			console.log(result)
 		}
-	})
+	});
+}
+
+// returns latitude and longitude of given address: {lat: xxxxx, lng: xxxxx}
+var getGeoCode = function(){
+	var the_serialized_data = $("#geocode").serialize();
+	console.log(the_serialized_data);
+	var url = "https://maps.googleapis.com/maps/api/geocode/json";
+	console.log($("#geocode"))
+	$.ajax({
+		url: url,
+		type: "GET",
+		data: the_serialized_data,
+		success: function(result){
+			console.log(result.results[0].geometry.location);
+			generateGoogleMap(result.results[0].geometry.location)
+		},
+		error: function(result){
+			console.log(result);
+		}
+	});
+};
+
+var generateGoogleMap = function(street){
+	var map = new google.maps.Map(document.getElementById("map"), {zoom: 17, center: street});
+	var marker = new google.maps.Marker({position: street, map: map});
+	$("#map").show();
+	$("#property-image").hide();
+
 }
 
 //document ready section
@@ -233,6 +263,10 @@ $(document).ready(function () {
 
 	$("#btnSearch").click(function(){
 		searchProperties();
+	})
+
+	$("#google-map").click(function(){
+		getGeoCode();
 	})
 
 }); /* end the document ready event*/
