@@ -182,7 +182,7 @@ var renderPropertyPage = function(data){
 			$("#baths").html(result.baths);
 			$("#sqft").html(result.sqft);
 			$("#rental_fee").html(result.rental_fee);
-			$("#address").val(result.street)
+			$("#address").val(result.street + " " + result.city + " " + result.state)
 
 		},
 		error: function(){
