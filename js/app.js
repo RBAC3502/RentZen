@@ -168,11 +168,11 @@ var renderPropertyPage = function(data){
 		success: function(result){
 			console.log(result);
 			$("#description").html(result.description);
-			$("#city").html(result.city);
+			$("#city1").html(result.city);
 			$("#beds").html(result.beds);
 			$("#baths").html(result.baths);
-			$("#square-feet").html(result.sqft);
-			$("#monthly-rent").html(result.rental_fee);
+			$("#sqft").html(result.sqft);
+			$("#rental_fee").html(result.rental_fee);
 
 		},
 		error: function(){
