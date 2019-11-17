@@ -236,7 +236,7 @@ $(document).ready(function () {
 	/* this controls navigation - show / hide pages as needed */
 
 	/* what to do when a navigation link is clicked */
-	$(".nav-link, .list-group-item, #signup-link").click(function () {
+	$(".nav-link, .list-group-item, #signup-link, #update-link").click(function () {
 		navigationControl(this);
 		console.log(this);
 	});
@@ -268,6 +268,10 @@ $(document).ready(function () {
 
 	$("#google-map").click(function(){
 		getGeoCode();
+	})
+
+	$("#btnApply").click(function() {
+		buttonFunc("#div-rentalApp");
 	})
 
 }); /* end the document ready event*/
