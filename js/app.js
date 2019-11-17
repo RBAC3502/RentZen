@@ -105,6 +105,7 @@ var signupFunc = function () {
 
 var updateProfile = function () {
 	var the_serialized_data = $('#form-profile').serialize();
+	console.log(the_serialized_data)
 	var url = endpoint02 + '/renter';
 	$.ajax({
 		url: url,

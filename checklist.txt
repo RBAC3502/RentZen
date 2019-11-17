@@ -1,0 +1,37 @@
+RentZen Project Checklist
+
+1. Sign Up
+    Done
+
+2. Sign in
+    Done
+
+3. Sign Out
+    Done
+
+4. Update Profile
+    Done
+
+5. Search for and get a list of properties by city
+    Done
+
+6. See details of a specific property
+    Done
+
+7. Apply to rent a property
+    In progress
+        Need:
+            UI
+            Page Render Function
+            Back End
+
+8. See a list of properties I have applied to and the status of each application
+    Not Started?
+        Need:
+            UI
+            Page
+            Back End
+9. Google Map/Street View
+    In progress
+        Need: 
+            Street View on button click
