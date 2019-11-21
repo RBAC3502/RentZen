@@ -8,6 +8,8 @@ localStorage.lastnavlink = '';
 
 /* SUPPORTING FUNCTIONS */
 
+var propertyObj;
+
 var navigationControl = function (the_link) {
 	console.log(the_link)
 	/* manage the content that is displayed */
@@ -33,6 +35,10 @@ var navigationControl = function (the_link) {
 		localStorage.usertoken = 0;
 		$(".secured").addClass("locked");
 		$(".secured").removeClass("unlocked");
+	}
+
+	if (idToShow == '#div-applications') {
+		myApplicationsPage();
 	}
 
 	$(".content-wrapper").hide(); /* hide all content-wrappers */
@@ -185,6 +191,8 @@ var renderPropertyPage = function(data){
 			$("#rental_fee").html(result.rental_fee);
 			$("#address").val(result.street + " " + result.city + " " + result.state)
 
+			propertyObj = result;
+
 		},
 		error: function(){
 			console.log(result)
@@ -218,6 +226,63 @@ var generateGoogleMap = function(street){
 	$("#map").show();
 	$("#property-image").hide();
 
+}
+
+var renderApplicationPage = function(){
+	console.log("property: ", propertyObj)
+	$("#streetName2").html(propertyObj.street)
+	$("#landlord-name").val(propertyObj.landlordfirstname + " " + propertyObj.landlordlastname);
+	$("#email-address").val(propertyObj.landlordusername);
+	$("#fullname").val($("#firstname1").val() + " " + $("#lastname1").val());
+	$("#credit-score").val($("#creditrating1").val());
+	$("#income2").val($("#income1").val());
+	$("#phone2").val($("#phone1").val());
+	$("#email2").val($("#username1").val());
+
+	if (propertyObj.picture_url == ""){
+		var propPic =  "<img class='img-fluid' src='images/no_image.png'></img>"
+	}
+
+	$("#property-image2").html(propPic)
+}
+
+var myApplicationsPage = function(renterId){
+	var data = "renterid=" + localStorage.usertoken;
+	var url = endpoint02 + "/rentalapplications"
+	$.ajax({
+		url: url,
+		type: "GET",
+		data: data,
+		success: function(result){
+			console.log(result);
+		},
+		error: function(result){
+			console.log(result)
+		}
+	})
+}
+
+var submitApplication = function(){
+	$("#renteridH").val(localStorage.usertoken);
+	$("#propertyidH").val(propertyObj.propertyid);
+	$("#move_in_dateH").val($("#date").val());
+	$("#rentermessageH").val($("#landlord-message").val());
+
+
+	var data = $("#hiddenapp").serialize();
+	var url = endpoint02 + "/rentalapplications";
+	console.log(data)
+	$.ajax({
+		url: url,
+		type: "POST",
+		data: data,
+		success: function(result){
+			console.log(result)
+		},
+		error: function(result){
+			console.log(result)
+		}
+	})
 }
 
 //document ready section
@@ -271,7 +336,12 @@ $(document).ready(function () {
 	})
 
 	$("#btnApply").click(function() {
+		renderApplicationPage();
 		buttonFunc("#div-rentalApp");
+	})
+
+	$("#btnSubmitApp").click(function(){
+		submitApplication();
 	})
 
 }); /* end the document ready event*/
