@@ -255,9 +255,15 @@ var myApplicationsPage = function(renterId){
 		data: data,
 		success: function(result){
 			console.log(result);
+			$("#rentalApplications").html("<tr><th>Property</th><th>Landlord</th><th>Rental Fee</th><th>Status</th></tr>");
+			for(var i = 0; i < result.length; i++){
+				var tableInput = "<tr><td>" + result[i].street + "</td><td>" + result[i].landlordfirstname + " " + result[i].landlordlastname + "</td><td>" + result[i].rental_fee + "</td><td>" + result[i].applicationstatus +"</td></tr>";
+				$("#rentalApplications").append(tableInput);
+			}
 		},
 		error: function(result){
 			console.log(result)
+			$("#rentalApplications").html(result.responseText);
 		}
 	})
 }
