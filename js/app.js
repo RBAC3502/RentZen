@@ -149,7 +149,7 @@ var searchProperties = function(){
 			var appendProperty;
 			var propPic;
 			$("#properties").html("");
-
+			$("#searcherror").hide().html(data.responseText)
 			for( var i = 0; i < data.length; i++){
 				if(data[i].picture_url == ""){
 					propPic =  "<img class='img-fluid' src='images/no_image.png'></img>"
@@ -164,6 +164,7 @@ var searchProperties = function(){
 		},
 		error: function(data){
 			console.log("error", data);
+			$("#searcherror").show().html(data.responseText)
 		}
 	})
 };
