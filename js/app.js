@@ -25,6 +25,7 @@ var navigationControl = function (the_link) {
 		console.log(tag);
 		console.log(data);
 		renderPropertyPage(data);
+		$("#div-property").show()
 		$("#map").hide();
 		$("#property-image").show();
 	}
@@ -117,13 +118,16 @@ var updateProfile = function () {
 		url: url,
 		type: "PUT",
 		data: the_serialized_data,
-		success: function () {
+		success: function (data) {
+			console.log(data)
 			console.log("success");
-			$("#update-message").show().html("success")
+			$("#update-success").show().html("Profile successfully updated")
+			$("#update-failure").hide();
 		},
 		error: function (data) {
 			console.log(data);
-			$("#update-message").show().html("failure")
+			$("#update-failure").show().html("Profile failed to update.")
+			$("#update-success").hide();
 		}
 	})
 }
@@ -285,11 +289,19 @@ var submitApplication = function(){
 		data: data,
 		success: function(result){
 			console.log(result)
+			$("#application_success").show().html("Application Submitted")
+			$("#application_error").hide();
 		},
 		error: function(result){
 			console.log(result)
+			$("#application_error").show().html(result.responseText)
+			$("#application_success").hide();
 		}
 	})
+}
+
+var hideErrors = function(){
+	$(".alert").hide();
 }
 
 //document ready section
@@ -309,6 +321,7 @@ $(document).ready(function () {
 
 	/* what to do when a navigation link is clicked */
 	$(".nav-link, .list-group-item, #signup-link, #update-link").click(function () {
+		hideErrors();
 		navigationControl(this);
 		console.log(this);
 	});
