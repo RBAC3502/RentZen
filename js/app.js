@@ -144,7 +144,6 @@ var buttonFunc = function (div) {
 var searchProperties = function(){
 	var the_serialized_data = $("#form-search").serialize();
 	var url = endpoint02 + "/rentalproperties"
-	$("#divrow").html("");
 	$.ajax({
 		url: url,
 		type: "GET",
@@ -283,21 +282,40 @@ var submitApplication = function(){
 	var data = $("#hiddenapp").serialize();
 	var url = endpoint02 + "/rentalapplications";
 	console.log(data)
-	$.ajax({
-		url: url,
-		type: "POST",
-		data: data,
-		success: function(result){
-			console.log(result)
-			$("#application_success").show().html("Application Submitted")
-			$("#application_error").hide();
-		},
-		error: function(result){
-			console.log(result)
-			$("#application_error").show().html(result.responseText)
-			$("#application_success").hide();
-		}
-	})
+
+	if( $("#fullname").val() == "" || $("#fullname").val() == "undefined"){
+		$("#application_error").show().html("Name is invalid, please update your profile.")
+	}
+	else if($("#credit-score").val() == "" || $("#credit-score").val() == "undefined" || $("#credit-score").val() == 0){
+		$("#application_error").show().html("Credit Score is invalid, please update your profile.")
+	}
+	else if($("#income2").val() == "" || $("#income2").val() == "undefined" || $("#income2").val() == 0){
+		$("#application_error").show().html("Income is invalid, please update your profile.")
+	}
+	else if($("#phone2").val() == "" || $("#phone2").val() == "undefined" || $("#phone2").val() == 0){
+		$("#application_error").show().html("Phone is invalid, please update your profile.")
+	}
+	else if($("#email2").val() == "" || $("#email2").val() == "undefined" || $("#email2").val() == 0){
+		$("#application_error").show().html("Email is invalid, please update your profile.")
+	}
+	else{
+		$.ajax({
+			url: url,
+			type: "POST",
+			data: data,
+			success: function(result){
+				console.log(result)
+				$("#application_success").show().html("Application Submitted")
+				$("#application_error").hide();
+			},
+			error: function(result){
+				console.log(result)
+				$("#application_error").show().html(result.responseText)
+				$("#application_success").hide();
+			}
+		})
+	}
+
 }
 
 var hideErrors = function(){
