@@ -126,7 +126,7 @@ var updateProfile = function () {
 		},
 		error: function (data) {
 			console.log(data);
-			$("#update-failure").show().html("Profile failed to update.")
+			$("#update-failure").show().html(data.responseText)
 			$("#update-success").hide();
 		}
 	})
@@ -157,7 +157,10 @@ var searchProperties = function(){
 				if(data[i].picture_url == ""){
 					propPic =  "<img class='img-fluid' src='images/no_image.png'></img>"
 				}
-				var thumbnail = "<div class='col-md-6'><div>"
+				else {
+					propPic =  "<img class='img-fluid' src='" + data[i].picture_url + "' style='height: 100%;'></img>"
+				}
+				var thumbnail = "<div class='col-md-6 thumb'><div>"
 				var propertyId = "<input type='hidden' name='propertyid' value='" + data[i].propertyid + "'>"
 
 				appendProperty = thumbnail + "<a onclick='navigationControl(this);' href='#div-property'>" + data[i].street + "<br>" + propPic + propertyId +"</a>"  +  "</div></div>"
@@ -184,6 +187,9 @@ var renderPropertyPage = function(data){
 			if (result.picture_url == ""){
 				var propPic =  "<img class='img-fluid' src='images/no_image.png'></img>"
 			}
+			else {
+				propPic =  "<img class='img-fluid' src='" + result.picture_url + "' style='height: 100%;'></img>"
+			}
 			
 			$("#streetName").html(result.street);
 			$("#property-image").html(propPic)
@@ -205,6 +211,7 @@ var renderPropertyPage = function(data){
 }
 
 // returns latitude and longitude of given address: {lat: xxxxx, lng: xxxxx}
+var street;
 var getGeoCode = function(){
 	var the_serialized_data = $("#geocode").serialize();
 	console.log(the_serialized_data);
@@ -215,8 +222,9 @@ var getGeoCode = function(){
 		type: "GET",
 		data: the_serialized_data,
 		success: function(result){
-			console.log(result.results[0].geometry.location);
-			generateGoogleMap(result.results[0].geometry.location)
+			street = result.results[0].geometry.location;
+			console.log(street);
+			generateGoogleMap()
 		},
 		error: function(result){
 			console.log(result);
@@ -224,7 +232,7 @@ var getGeoCode = function(){
 	});
 };
 
-var generateGoogleMap = function(street){
+var generateGoogleMap = function(){
 	var map = new google.maps.Map(document.getElementById("map"), {zoom: 17, center: street});
 	var marker = new google.maps.Marker({position: street, map: map});
 	$("#map").show();
@@ -246,13 +254,16 @@ var renderApplicationPage = function(){
 	if (propertyObj.picture_url == ""){
 		var propPic =  "<img class='img-fluid' src='images/no_image.png'></img>"
 	}
+	else {
+		propPic =  "<img class='img-fluid' src='" + propertyObj.picture_url + "' style='height: 100%;'></img>"
+	}
 
 	$("#property-image2").html(propPic)
 }
 
 var myApplicationsPage = function(renterId){
 	var data = "renterid=" + localStorage.usertoken;
-	var url = endpoint02 + "/rentalapplications"
+	var url = endpoint02 + "/applications"
 	$.ajax({
 		url: url,
 		type: "GET",
@@ -280,22 +291,22 @@ var submitApplication = function(){
 
 
 	var data = $("#hiddenapp").serialize();
-	var url = endpoint02 + "/rentalapplications";
+	var url = endpoint02 + "/application";
 	console.log(data)
 
-	if( $("#fullname").val() == "" || $("#fullname").val() == "undefined"){
+	if( $("#fullname").val() == "" || $("#fullname").val() == " " || $("#fullname").val() == undefined){
 		$("#application_error").show().html("Name is invalid, please update your profile.")
 	}
-	else if($("#credit-score").val() == "" || $("#credit-score").val() == "undefined" || $("#credit-score").val() == 0){
+	else if($("#credit-score").val() == "" || $("#credit-score").val() == undefined || $("#credit-score").val() == 0){
 		$("#application_error").show().html("Credit Score is invalid, please update your profile.")
 	}
-	else if($("#income2").val() == "" || $("#income2").val() == "undefined" || $("#income2").val() == 0){
+	else if($("#income2").val() == "" || $("#income2").val() == undefined || $("#income2").val() == 0){
 		$("#application_error").show().html("Income is invalid, please update your profile.")
 	}
-	else if($("#phone2").val() == "" || $("#phone2").val() == "undefined" || $("#phone2").val() == 0){
+	else if($("#phone2").val() == "" || $("#phone2").val() == undefined || $("#phone2").val() == 0){
 		$("#application_error").show().html("Phone is invalid, please update your profile.")
 	}
-	else if($("#email2").val() == "" || $("#email2").val() == "undefined" || $("#email2").val() == 0){
+	else if($("#email2").val() == "" || $("#email2").val() == undefined || $("#email2").val() == 0){
 		$("#application_error").show().html("Email is invalid, please update your profile.")
 	}
 	else{
